@@ -110,6 +110,7 @@ void ccmni_set_init_rps(unsigned long rps_value)
 }
 EXPORT_SYMBOL(ccmni_set_init_rps);
 
+#if IS_ENABLED(CONFIG_MTK_NET_RPS)
 void set_ccmni_rps(unsigned long value)
 {
 	int i = 0;
@@ -123,6 +124,7 @@ void set_ccmni_rps(unsigned long value)
 		set_rps_map(ccmni_ctl_blk->ccmni_inst[i]->dev->_rx, value);
 }
 EXPORT_SYMBOL(set_ccmni_rps);
+#endif
 
 void ccmni_set_cur_speed(u64 cur_dl_speed)
 {
