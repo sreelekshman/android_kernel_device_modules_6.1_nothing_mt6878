@@ -509,6 +509,8 @@ mgk_64_k61_device_modules = [
     "drivers/mmc/host/mtk-wp.ko",
     "drivers/mmc/host/mtk-mmc.ko",
     "drivers/mmc/host/mtk-sd.ko",
+    "drivers/nothing_stability/nothing_check_parts.ko",
+    "drivers/nothing_stability/nothing_error_report.ko",
     "drivers/nvmem/nvmem-mt6338-efuse.ko",
     "drivers/nvmem/nvmem-mt635x-efuse.ko",
     "drivers/nvmem/nvmem-mt6681-efuse.ko",
