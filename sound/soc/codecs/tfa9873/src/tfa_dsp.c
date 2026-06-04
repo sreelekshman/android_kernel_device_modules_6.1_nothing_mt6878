@@ -54,7 +54,6 @@ void tfa9895_ops(struct tfa_device_ops *ops);
 void tfa9894_ops(struct tfa_device_ops *ops);
 
 #ifndef MIN
-#define MIN(A,B) (A<B?A:B)
 #endif
 
 /* retry values */

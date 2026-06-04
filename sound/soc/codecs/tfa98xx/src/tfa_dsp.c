@@ -41,7 +41,6 @@
 #define TFA98XX_KEY2_PROTECTED_MTP0_MTPOTC_POS 0
 
 #ifndef MIN
-#define MIN(A, B) (((A) - (B)) < 0 ? A : B)
 #endif
 
 /* retry values */
