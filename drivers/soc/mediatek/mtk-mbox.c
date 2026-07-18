@@ -536,6 +536,11 @@ static irqreturn_t mtk_mbox_isr(int irq, void *dev_id)
 	irq_temp = 0;
 	spin_unlock_irqrestore(&minfo->mbox_lock, flags);
 
+	if (irq_status != 0) {
+		pr_err("[SCP_MBOX_DEBUG] ISR entry: dev=%s, mbox=%u, irq_status=0x%x\n",
+		       mbdev->name, mbox, irq_status);
+	}
+
 	trace_mtk_mbox_isr_entry(mbdev->name, irq_status);
 
 	if (mbdev->pre_cb && mbdev->pre_cb(mbdev->prdata)) {
@@ -552,6 +557,8 @@ static irqreturn_t mtk_mbox_isr(int irq, void *dev_id)
 			continue;
 		/*recv irq trigger*/
 		if (((0x1 << pin_recv->pin_index) & irq_status) > 0x0) {
+			pr_err("[SCP_MBOX_DEBUG] Pin match: dev=%s, chan_id=%d, pin_index=%d, offset=%d\n",
+			       mbdev->name, pin_recv->chan_id, pin_recv->pin_index, pin_recv->offset);
 			pin_recv->recv_record.recv_irq_count++;
 			irq_temp = irq_temp | (0x1 << pin_recv->pin_index);
 			/*check user buf*/
@@ -565,6 +572,8 @@ static irqreturn_t mtk_mbox_isr(int irq, void *dev_id)
 				/*queue mode*/
 				ipihead = (struct mtk_ipi_msg_hd *)(minfo->base
 					+ (pin_recv->offset * MBOX_SLOT_SIZE));
+				pr_err("[SCP_MBOX_DEBUG] Queue mode msg: id=%u, len=%u\n",
+				       ipihead->id, ipihead->len);
 				ret = mtk_mbox_read_hd(mbdev, mbox,
 					pin_recv->offset, pin_recv->pin_buf);
 
